@@ -1,4 +1,7 @@
-require('dotenv').config();
+// Solo cargar .env en desarrollo local
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 const express = require('express');
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
@@ -15,7 +18,12 @@ const startServer = async () => {
   const app = express();
 
   app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5173'],
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:5173',
+      /\.vercel\.app$/,
+      /\.onrender\.com$/,
+    ],
     credentials: true,
   }));
 
