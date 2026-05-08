@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy:   #0f2547;
+    --navy-2: #1a3a6b;
+    --green:  #5a9e2f;
+    --green-2:#7dc242;
+    --color-scheme: light;
+  }
+
+  html.dark {
+    --color-scheme: dark;
+    --card-bg: rgb(15 23 42);           /* slate-900 */
+    --card-border: rgb(30 41 59);        /* slate-800 */
+    --table-header-bg: rgb(8 14 26 / 0.6);
+    --table-header-color: rgb(148 163 184); /* slate-400 */
+    --table-border: rgb(30 41 59);       /* slate-800 */
+    --table-border-light: rgb(30 41 59 / 0.5);
+    --table-cell-color: rgb(203 213 225); /* slate-300 */
+    --table-row-hover: rgb(30 41 59 / 0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    @apply bg-white dark:bg-gray-950 text-slate-800 dark:text-slate-50 antialiased transition-colors duration-200;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Scrollbar sutil - Tema claro */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-slate-300 dark:bg-slate-700 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-slate-400 dark:bg-slate-600; }
+
+  /* Smooth transitions para tema */
+  * {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+
+  /* ── Botones ─────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-lg
+           px-4 py-2 text-sm transition-all duration-200 focus:outline-none
+           focus-visible:ring-2 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed select-none;
+  }
+  .btn-primary {
+    @apply btn bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600
+           focus-visible:ring-blue-500 shadow-sm hover:shadow-md;
+  }
+  .btn-success {
+    @apply btn bg-emerald-600 dark:bg-emerald-700 text-white hover:bg-emerald-700 dark:hover:bg-emerald-600
+           focus-visible:ring-emerald-500 shadow-sm hover:shadow-md;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 dark:bg-red-700 text-white hover:bg-red-700 dark:hover:bg-red-600
+           focus-visible:ring-red-500 shadow-sm hover:shadow-md;
+  }
+  .btn-secondary {
+    @apply btn bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 
+           border border-slate-200 dark:border-slate-700
+           hover:bg-slate-200 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600
+           focus-visible:ring-slate-400 dark:focus-visible:ring-slate-600 shadow-sm;
+  }
+  .btn-ghost {
+    @apply btn text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10
+           focus-visible:ring-slate-400 dark:focus-visible:ring-slate-600;
+  }
+  .btn-icon {
+    @apply btn p-2 rounded-lg;
+  }
+
+  /* ── Inputs ──────────────────────────────────────── */
+  .input-field {
+    @apply w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 
+           rounded-lg px-3 py-2 text-sm text-slate-800 dark:text-slate-100
+           placeholder-slate-400 dark:placeholder-slate-500
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:focus:ring-blue-400/30
+           focus:border-blue-600 dark:focus:border-blue-400
+           disabled:bg-slate-50 dark:disabled:bg-slate-800 disabled:text-slate-400 dark:disabled:text-slate-500
+           disabled:cursor-not-allowed;
+  }
+  .input-error {
+    @apply border-red-400 dark:border-red-500/50 focus:ring-red-300/50 dark:focus:ring-red-400/30 
+           focus:border-red-500 dark:focus:border-red-400;
+  }
+
+  /* ── Cards ───────────────────────────────────────── */
+  .card {
+    @apply rounded-xl shadow-sm p-6;
+    background-color: var(--card-bg, #ffffff);
+    border: 1px solid var(--card-border, rgb(241 245 249));
+  }
+  .card-hover {
+    @apply card transition-shadow duration-200 hover:shadow-md;
+  }
+
+  /* ── Badges ──────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+  .badge-success { 
+    @apply badge bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 
+           ring-1 ring-emerald-200 dark:ring-emerald-800/50;
+  }
+  .badge-warning { 
+    @apply badge bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300
+           ring-1 ring-amber-200 dark:ring-amber-800/50;
+  }
+  .badge-danger  { 
+    @apply badge bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300
+           ring-1 ring-red-200 dark:ring-red-800/50;
+  }
+  .badge-info    { 
+    @apply badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300
+           ring-1 ring-blue-200 dark:ring-blue-800/50;
+  }
+  .badge-neutral { 
+    @apply badge bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400
+           ring-1 ring-slate-200 dark:ring-slate-700;
+  }
+
+  /* ── Tabla ───────────────────────────────────────── */
+  .table-header {
+    @apply text-left px-4 py-3 text-xs font-bold
+           uppercase tracking-widest
+           border-b;
+    background-color: var(--table-header-bg, rgb(248 250 252));
+    color: var(--table-header-color, rgb(100 116 139));
+    border-bottom-color: var(--table-border, rgb(241 245 249));
+  }
+  .table-cell {
+    @apply px-4 py-3 text-sm border-b;
+    color: var(--table-cell-color, rgb(51 65 85));
+    border-bottom-color: var(--table-border-light, rgb(248 250 252));
+  }
+  .table-row {
+    @apply transition-colors duration-150;
+  }
+  .table-row:hover {
+    background-color: var(--table-row-hover, rgb(248 250 252 / 0.7));
+  }
+
+  /* ── Sidebar nav ─────────────────────────────────── */
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-semibold
+           transition-all duration-200;
+  }
+  .nav-link-active {
+    @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg;
+  }
+
+  /* ── Separador de sección ────────────────────────── */
+  .section-title {
+    @apply text-lg font-bold text-slate-800 dark:text-slate-50 mb-4;
+  }
+
+  /* ── Utilidades ──────────────────────────────────── */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-600;
+  }
+  
+  .gradient-accent {
+    @apply bg-gradient-to-r from-emerald-600 to-green-700 dark:from-emerald-700 dark:to-green-600;
+  }
+
+  /* Focus visible mejorado */
+  .focus-visible:focus-visible {
+    @apply ring-2 ring-offset-2 dark:ring-offset-slate-950;
+  }
+}
+
+/* Dark mode overrides para clases de componentes (@apply no procesa dark: correctamente) */
+/* Las cards y tablas ya usan variables CSS definidas en html.dark — no necesitan overrides aquí */
+
+/* Badges dark */
+.dark .badge-success {
+  background-color: rgb(6 78 59 / 0.3);
+  color: rgb(110 231 183);
+  --tw-ring-color: rgb(6 78 59 / 0.5);
+}
+.dark .badge-warning {
+  background-color: rgb(120 53 15 / 0.3);
+  color: rgb(252 211 77);
+  --tw-ring-color: rgb(120 53 15 / 0.5);
+}
+.dark .badge-danger {
+  background-color: rgb(127 29 29 / 0.3);
+  color: rgb(252 165 165);
+  --tw-ring-color: rgb(127 29 29 / 0.5);
+}
+.dark .badge-info {
+  background-color: rgb(30 58 138 / 0.3);
+  color: rgb(147 197 253);
+  --tw-ring-color: rgb(30 58 138 / 0.5);
+}
+.dark .badge-neutral {
+  background-color: rgb(30 41 59);
+  color: rgb(148 163 184);
+  --tw-ring-color: rgb(51 65 85);
+}
+
+/* Input dark */
+.dark .input-field {
+  background-color: rgb(15 23 42);
+  border-color: rgb(51 65 85);
+  color: rgb(241 245 249);
+}
+.dark .input-field::placeholder {
+  color: rgb(100 116 139);
+}
+.dark .input-field:focus {
+  border-color: rgb(96 165 250);
+  box-shadow: 0 0 0 2px rgb(96 165 250 / 0.2);
+}
