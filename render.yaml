@@ -3,7 +3,7 @@ services:
     name: aoa-inventario-backend
     runtime: node
     rootDir: backend
-    buildCommand: npm install
+    buildCommand: npm install --legacy-peer-deps
     startCommand: npm start
     envVars:
       - key: PORT
