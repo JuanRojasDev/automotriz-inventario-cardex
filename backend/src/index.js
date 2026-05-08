@@ -13,6 +13,12 @@ const { getUsuarioDesdeToken } = require('./middlewares/auth');
 const logger = require('./utils/logger');
 
 const startServer = async () => {
+  // Diagnóstico de variables en producción
+  console.log('NODE_ENV:', process.env.NODE_ENV);
+  console.log('MONGODB_URI set:', !!process.env.MONGODB_URI);
+  console.log('JWT_SECRET set:', !!process.env.JWT_SECRET);
+  console.log('PORT:', process.env.PORT);
+
   await connectDB();
 
   const app = express();
